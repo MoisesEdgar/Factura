@@ -24,8 +24,9 @@ public class FacturaServiceImpl implements FacturaService {
     //POST
     @Override
     public Factura saveFactura(Factura factura, Partida partida){
-        factura.setFacturaTotal(partida.getPartidaTotalBasePrecioArticulo());
+        factura.setFacturaTotal(partida.getTotal());
         return facturaRepository.save(factura);
+
     }
 
 
@@ -67,8 +68,7 @@ public class FacturaServiceImpl implements FacturaService {
         }
 
         if (Objects.nonNull(
-                factura.getFacturaFechaExpedicion())
-                && !factura.getFacturaFolio().isEmpty()) {
+                factura.getFacturaFechaExpedicion())){
             depDB.setFacturaFechaExpedicion(
                     factura.getFacturaFechaExpedicion());
         }

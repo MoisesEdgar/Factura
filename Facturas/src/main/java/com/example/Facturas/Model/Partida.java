@@ -24,6 +24,7 @@ public class Partida {
     @JoinColumn(name = "FacturaId")
     private  Factura IdFactura ;
 
+
     public Factura getIdFactura() {
         return IdFactura;
     }
@@ -32,8 +33,14 @@ public class Partida {
         IdFactura = idFactura;
     }
 
+    double total;
     private void calcularTotalBase() {
         this.PartidaTotalBasePrecioArticulo = this.PartidaPrecioUnitarioArticulo * this.PartidaCantidadAdquirida;
+        this.total = this.total + this.PartidaTotalBasePrecioArticulo;
+    }
+
+    public double getTotal(){
+        return total;
     }
 
     public Long getPartidaId() {
@@ -57,10 +64,9 @@ public class Partida {
     }
 
     public void setPartidaCantidadAdquirida(int partidaCantidadAdquirida) {
-       if (partidaCantidadAdquirida >= 0) {
+        if (partidaCantidadAdquirida >= 0) {
             this.PartidaCantidadAdquirida = partidaCantidadAdquirida;
             PartidaCantidadAdquirida = partidaCantidadAdquirida;
-            calcularTotalBase();
         }
     }
 
@@ -72,17 +78,16 @@ public class Partida {
         if( partidaPrecioUnitarioArticulo >= 0) {
             this.PartidaPrecioUnitarioArticulo = partidaPrecioUnitarioArticulo;
             PartidaPrecioUnitarioArticulo = partidaPrecioUnitarioArticulo;
-            calcularTotalBase();
         }
     }
 
     public double getPartidaTotalBasePrecioArticulo() {
+        calcularTotalBase();
         return PartidaTotalBasePrecioArticulo;
     }
 
     public void setPartidaTotalBasePrecioArticulo(double partidaTotalBasePrecioArticulo) {
         PartidaTotalBasePrecioArticulo = partidaTotalBasePrecioArticulo;
     }
-
 
 }

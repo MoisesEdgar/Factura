@@ -23,13 +23,10 @@ public class Factura {
     private double FacturaTotal;
     private LocalDate FacturaFechaExpedicion;
    // mappedBy = "IdFactura",
-    @OneToMany(  cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
     private Set<Partida> partidas ;
 
 
-    private void calcularTotal() {
-        this.FacturaTotal += this.FacturaTotal;
-    }
 
     public Set<Partida> getPartidas() {
         return partidas;
@@ -56,12 +53,12 @@ public class Factura {
     }
 
     public double getFacturaTotal() {
+
         return FacturaTotal;
     }
 
     public void setFacturaTotal(double facturaTotal) {
         FacturaTotal = facturaTotal;
-        calcularTotal();
     }
 
     public LocalDate getFacturaFechaExpedicion() {
@@ -71,6 +68,5 @@ public class Factura {
     public void setFacturaFechaExpedicion(LocalDate facturaFechaExpedicion) {
         FacturaFechaExpedicion = facturaFechaExpedicion;
     }
-
 }
 
