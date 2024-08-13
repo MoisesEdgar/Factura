@@ -1,46 +1,25 @@
 package com.example.Facturas.Model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+
 
 @Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class Partida {
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long PartidaId;
-    private String PartidaNombreArticulo;
-    private int PartidaCantidadAdquirida;
-    private double PartidaPrecioUnitarioArticulo;
-    private double PartidaTotalBasePrecioArticulo;
+   private Long PartidaId;
+
+   private String PartidaNombreArticulo;
+   private Integer PartidaCantidadAdquirida;
+   private Double PartidaPrecioUnitarioArticulo;
+   private Double PartidaTotalBasePrecioArticulo;
 
     @ManyToOne
-    @JoinColumn(name = "FacturaId")
-    private  Factura IdFactura ;
+    @JoinColumn(name = "factura_id")
+    private  Factura factura ;
 
-
-    public Factura getIdFactura() {
-        return IdFactura;
-    }
-
-    public void setIdFactura(Factura idFactura) {
-        IdFactura = idFactura;
-    }
-
-    double total;
-    private void calcularTotalBase() {
-        this.PartidaTotalBasePrecioArticulo = this.PartidaPrecioUnitarioArticulo * this.PartidaCantidadAdquirida;
-        this.total = this.total + this.PartidaTotalBasePrecioArticulo;
-    }
-
-    public double getTotal(){
-        return total;
+    public void calcularTotalBasePrecioArticulo() {
+        this.PartidaTotalBasePrecioArticulo = this.PartidaCantidadAdquirida * this.PartidaPrecioUnitarioArticulo;
     }
 
     public Long getPartidaId() {
@@ -48,7 +27,7 @@ public class Partida {
     }
 
     public void setPartidaId(Long partidaId) {
-        PartidaId = partidaId;
+        this.PartidaId = partidaId;
     }
 
     public String getPartidaNombreArticulo() {
@@ -56,38 +35,38 @@ public class Partida {
     }
 
     public void setPartidaNombreArticulo(String partidaNombreArticulo) {
-        PartidaNombreArticulo = partidaNombreArticulo;
+        this.PartidaNombreArticulo = partidaNombreArticulo;
     }
 
-    public int getPartidaCantidadAdquirida() {
+    public Integer getPartidaCantidadAdquirida() {
         return PartidaCantidadAdquirida;
     }
 
-    public void setPartidaCantidadAdquirida(int partidaCantidadAdquirida) {
-        if (partidaCantidadAdquirida >= 0) {
-            this.PartidaCantidadAdquirida = partidaCantidadAdquirida;
-            PartidaCantidadAdquirida = partidaCantidadAdquirida;
-        }
+    public void setPartidaCantidadAdquirida(Integer partidaCantidadAdquirida) {
+        this.PartidaCantidadAdquirida = partidaCantidadAdquirida;
     }
 
-    public double getPartidaPrecioUnitarioArticulo() {
+    public Double getPartidaPrecioUnitarioArticulo() {
         return PartidaPrecioUnitarioArticulo;
     }
 
-    public void setPartidaPrecioUnitarioArticulo(double partidaPrecioUnitarioArticulo) {
-        if( partidaPrecioUnitarioArticulo >= 0) {
-            this.PartidaPrecioUnitarioArticulo = partidaPrecioUnitarioArticulo;
-            PartidaPrecioUnitarioArticulo = partidaPrecioUnitarioArticulo;
-        }
+    public void setPartidaPrecioUnitarioArticulo(Double partidaPrecioUnitarioArticulo) {
+        this.PartidaPrecioUnitarioArticulo = partidaPrecioUnitarioArticulo;
     }
 
-    public double getPartidaTotalBasePrecioArticulo() {
-        calcularTotalBase();
+    public Double getPartidaTotalBasePrecioArticulo() {
         return PartidaTotalBasePrecioArticulo;
     }
 
-    public void setPartidaTotalBasePrecioArticulo(double partidaTotalBasePrecioArticulo) {
-        PartidaTotalBasePrecioArticulo = partidaTotalBasePrecioArticulo;
+    public void setPartidaTotalBasePrecioArticulo(Double partidaTotalBasePrecioArticulo) {
+        this.PartidaTotalBasePrecioArticulo = partidaTotalBasePrecioArticulo;
     }
 
+    public Factura getFactura() {
+        return factura;
+    }
+
+    public void setFactura(Factura factura) {
+        this.factura = factura;
+    }
 }

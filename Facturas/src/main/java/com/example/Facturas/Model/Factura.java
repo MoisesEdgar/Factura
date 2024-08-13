@@ -1,39 +1,29 @@
 package com.example.Facturas.Model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.Set;
+import java.util.Date;
+import java.util.List;
+
 
 @Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 
 public class Factura {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long FacturaId;
+
     private String FacturaFolio;
-    private double FacturaTotal;
+    private Double FacturaTotal;
     private LocalDate FacturaFechaExpedicion;
-   // mappedBy = "IdFactura",
-    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
-    private Set<Partida> partidas ;
+    //mappedBy = "factura",
+    @OneToMany( cascade = CascadeType.ALL)
+    private List<Partida> partidas ;
 
-
-
-    public Set<Partida> getPartidas() {
-        return partidas;
-    }
-
-    public void setPartidas(Set<Partida> partidas) {
-        this.partidas = partidas;
+    //****************************************************************************
+    public void calcularTotal() {
+        this.FacturaTotal = partidas.stream().mapToDouble(Partida::getPartidaTotalBasePrecioArticulo).sum();
     }
 
     public Long getFacturaId() {
@@ -41,7 +31,7 @@ public class Factura {
     }
 
     public void setFacturaId(Long facturaId) {
-        FacturaId = facturaId;
+        this.FacturaId = facturaId;
     }
 
     public String getFacturaFolio() {
@@ -49,16 +39,15 @@ public class Factura {
     }
 
     public void setFacturaFolio(String facturaFolio) {
-        FacturaFolio = facturaFolio;
+        this.FacturaFolio = facturaFolio;
     }
 
-    public double getFacturaTotal() {
-
+    public Double getFacturaTotal() {
         return FacturaTotal;
     }
 
-    public void setFacturaTotal(double facturaTotal) {
-        FacturaTotal = facturaTotal;
+    public void setFacturaTotal(Double facturaTotal) {
+        this.FacturaTotal = facturaTotal;
     }
 
     public LocalDate getFacturaFechaExpedicion() {
@@ -66,7 +55,15 @@ public class Factura {
     }
 
     public void setFacturaFechaExpedicion(LocalDate facturaFechaExpedicion) {
-        FacturaFechaExpedicion = facturaFechaExpedicion;
+        this.FacturaFechaExpedicion = facturaFechaExpedicion;
+    }
+
+    public List<Partida> getPartidas() {
+        return partidas;
+    }
+
+    public void setPartidas(List<Partida> partidas) {
+        this.partidas = partidas;
     }
 }
 
