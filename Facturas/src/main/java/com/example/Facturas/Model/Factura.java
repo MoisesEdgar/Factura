@@ -3,7 +3,6 @@ package com.example.Facturas.Model;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 
@@ -17,12 +16,12 @@ public class Factura {
     private String FacturaFolio;
     private Double FacturaTotal;
     private LocalDate FacturaFechaExpedicion;
-    //mappedBy = "factura",
-    @OneToMany( cascade = CascadeType.ALL)
+    //"factura": null,
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Partida> partidas ;
 
     //****************************************************************************
-    public void calcularTotal() {
+    public void calcularTotalFactura() {
         this.FacturaTotal = partidas.stream().mapToDouble(Partida::getPartidaTotalBasePrecioArticulo).sum();
     }
 
@@ -39,6 +38,7 @@ public class Factura {
     }
 
     public void setFacturaFolio(String facturaFolio) {
+
         this.FacturaFolio = facturaFolio;
     }
 

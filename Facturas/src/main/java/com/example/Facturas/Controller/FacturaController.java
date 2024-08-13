@@ -30,8 +30,8 @@ public class FacturaController {
 
 
     @PutMapping("/Factura/{id}")
-    public Factura updateFactura(@PathVariable("id")  Factura facturaDetalles, Long FacturaId){
-        return facturaService.updateFactura(facturaDetalles, FacturaId);
+    public Factura updateFactura(@RequestBody Factura factura, @PathVariable("id") Long FacturaId){
+        return facturaService.updateFactura(factura ,FacturaId);
     }
 
     @DeleteMapping("/Factura/{id}")

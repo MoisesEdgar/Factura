@@ -43,7 +43,9 @@ public class Partida {
     }
 
     public void setPartidaCantidadAdquirida(Integer partidaCantidadAdquirida) {
-        this.PartidaCantidadAdquirida = partidaCantidadAdquirida;
+        if (partidaCantidadAdquirida >= 0) {
+            this.PartidaCantidadAdquirida = partidaCantidadAdquirida;
+        }
     }
 
     public Double getPartidaPrecioUnitarioArticulo() {
@@ -51,15 +53,20 @@ public class Partida {
     }
 
     public void setPartidaPrecioUnitarioArticulo(Double partidaPrecioUnitarioArticulo) {
-        this.PartidaPrecioUnitarioArticulo = partidaPrecioUnitarioArticulo;
+        if (partidaPrecioUnitarioArticulo >= 0){
+            this.PartidaPrecioUnitarioArticulo = partidaPrecioUnitarioArticulo;
+        }
     }
 
     public Double getPartidaTotalBasePrecioArticulo() {
+        calcularTotalBasePrecioArticulo();
         return PartidaTotalBasePrecioArticulo;
     }
 
     public void setPartidaTotalBasePrecioArticulo(Double partidaTotalBasePrecioArticulo) {
-        this.PartidaTotalBasePrecioArticulo = partidaTotalBasePrecioArticulo;
+        if (partidaTotalBasePrecioArticulo >= 0){
+            this.PartidaTotalBasePrecioArticulo = partidaTotalBasePrecioArticulo;
+        }
     }
 
     public Factura getFactura() {
